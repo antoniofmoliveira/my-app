@@ -1,0 +1,13 @@
+userId : uuid
+todoId : uuid
+title : text
+completed : boolean
+dueDate : date
+
+canCreate 
+    createTodo
+owner
+    editTodo
+    completeTodo
+    deleteTodo
+    listTodo

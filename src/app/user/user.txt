@@ -1,0 +1,37 @@
+useId : uuid
+name : text
+email : text 
+bio : text
+password : text
+blocked : boolean
+
+photo
+userId : uuid
+photo : blob
+
+userRole
+userId : uuid
+userRole : uuid
+
+roles
+roleId : uuid
+roleName : text 
+roleDescription : text
+listable : boolean
+    Read
+    Comment
+    Create
+    Admin
+
+any
+    createUser
+    uploadPhoto
+owner
+    editUser
+    changePassword
+    uploadPhoto
+Admin
+    blockUser
+    changeUserRole
+    listUsers
+    

@@ -1,0 +1,14 @@
+postId : uuid
+commentId : uuid
+userId : uuid
+body : text
+publishDate : date
+hidden : boolean
+
+canView
+    listComments
+canComment
+    createComment
+owner
+canAdmin
+    hideComment

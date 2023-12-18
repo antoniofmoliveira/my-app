@@ -1,0 +1,24 @@
+userId : uuid
+postId : uuid
+title : text
+body : text
+tags : text
+publishDate : date
+retracted : boolean 
+retractedBy : uuid
+retractedDate : date
+hidden : boolean
+
+
+canView
+    listPosts
+    viewPost
+canCreate
+    createPost
+owner
+    editPost
+    publishPost
+    retractPost
+canAdmin
+    retractPost
+    hidePost
