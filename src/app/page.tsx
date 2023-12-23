@@ -8,7 +8,7 @@ export default async function Home() {
     return (
 
         <main>
-            {user.email} {user.id}
+            {user.email} {user.userId}
         </main>
     )
 }

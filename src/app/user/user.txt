@@ -1,13 +1,14 @@
-useId : uuid
+userId : uuid
 name : text
 email : text 
-bio : text
 password : text
+bio : text
 blocked : boolean
 
 photo
 userId : uuid
 photo : blob
+type: string
 
 userRole
 userId : uuid

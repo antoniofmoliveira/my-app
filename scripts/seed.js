@@ -4,7 +4,7 @@ const {
 } = require('../src/app/_lib/placeholder-data.js');
 const createConnectionPool = require('@databases/pg');
 const db = createConnectionPool(process.env.DATABASE_URL);
-const {sql} = require('@databases/pg');
+const { sql } = require('@databases/pg');
 const bcrypt = require('bcrypt');
 
 async function seedUsers(client) {
@@ -13,13 +13,22 @@ async function seedUsers(client) {
         // Create the "users" table if it doesn't exist
         const createTable = await client.query(sql`
         CREATE TABLE IF NOT EXISTS users (
-          id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+          userId UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
           name VARCHAR(255) NOT NULL,
           email TEXT NOT NULL UNIQUE,
-          password TEXT NOT NULL
+          password TEXT NOT NULL,
+          bio TEXT NOT NULL,
+          blocked BOOLEAN DEFAULT false
         );
       `);
-
+      const createTable2 = await client.query(sql`
+      CREATE TABLE IF NOT EXISTS photo (
+        userId UUID PRIMARY KEY,
+        type TEXT NOT NULL,
+        photo BYTEA NOT NULL,
+        CONSTRAINT fk_user FOREIGN KEY(userId) REFERENCES users(userId)
+      );
+    `);
         console.log(`Created "users" table`);
 
         // Insert data into the "users" table
@@ -27,9 +36,9 @@ async function seedUsers(client) {
             users.map(async (user) => {
                 const hashedPassword = await bcrypt.hash(user.password, 10);
                 return client.query(sql`
-          INSERT INTO users (id, name, email, password)
-          VALUES (${user.id}, ${user.name}, ${user.email}, ${hashedPassword})
-          ON CONFLICT (id) DO NOTHING;
+          INSERT INTO users (userId, name, email, password, bio)
+          VALUES (${user.userId}, ${user.name}, ${user.email}, ${hashedPassword}, ${user.bio})
+          ON CONFLICT (userId) DO NOTHING;
         `);
             }),
         );
@@ -38,7 +47,7 @@ async function seedUsers(client) {
 
         // console.log(createTable);
         // console.log(insertedUsers);
-        
+
         return {
             createTable,
             users: insertedUsers,

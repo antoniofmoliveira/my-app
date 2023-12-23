@@ -1,0 +1,22 @@
+userId : uuid
+todoId : uuid
+title : text
+completed : boolean
+dueDate : date
+
+canCreate 
+    createTodo
+owner
+    editTodo
+    completeTodo
+    deleteTodo
+    listTodo
+
+CREATE TABLE IF NOT EXISTS todo (
+    todoId UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+    userId UUID NOT NULL,
+    title TEXT NOT NULL,
+    completed BOOLEAN DEFAULT FALSE,
+    dueDate DATE DEFAULT NULL,
+    CONSTRAINT fk_user FOREIGN KEY(userId) REFERENCES users(userId)
+)

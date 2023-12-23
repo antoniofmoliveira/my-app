@@ -18,3 +18,41 @@ export async function getUser(email: string) {
         throw new Error('Failed to fetch user.');
     }
 }
+
+// any
+//     createUser
+//     uploadPhoto
+// owner
+//     editUser
+//     changePassword
+//     uploadPhoto
+// Admin
+//     blockUser
+//     changeUserRole
+//     listUsers
+// canCreate 
+//     createTodo
+// owner
+//     editTodo
+//     completeTodo
+//     deleteTodo
+//     listTodo
+// canView
+//     listPosts
+//     viewPost
+// canCreate
+//     createPost
+// owner
+//     editPost
+//     publishPost
+//     retractPost
+// canAdmin
+//     retractPost
+//     hidePost
+// canView
+//     listComments
+// canComment
+//     createComment
+// owner
+// canAdmin
+//     hideComment
